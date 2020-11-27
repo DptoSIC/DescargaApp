@@ -1,9 +1,19 @@
 package descargas;
 
-public class Contenido {
+public abstract class Contenido implements Identificable, Nombrable {
 
 	private String id;
 	private String titulo;
+	
+	@Override
+	public String getId() {
+		return id;
+	}
+	
+	@Override
+	public String getTitulo() {
+		return titulo;
+	}
 
 	public Contenido() {
 	}
