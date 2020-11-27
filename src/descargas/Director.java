@@ -1,5 +1,5 @@
 package descargas;
 
-public class Director {
-	String nombre;
+public class Director extends Persona {
+	
 }

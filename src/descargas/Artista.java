@@ -1,5 +1,5 @@
 package descargas;
 
-public class Artista {
-	String nombre;
+public class Artista extends Persona {
+	
 }

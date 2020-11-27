@@ -1,6 +1,5 @@
 package descargas;
 
-public class Actor {
-	String nombre;
+public class Actor extends Persona {
 
 }
