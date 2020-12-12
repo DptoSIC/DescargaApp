@@ -1,10 +1,18 @@
-package descargas;
+package com.app;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import descargas.Conexion;
+import descargas.Contenido;
+import descargas.Fichero;
+import descargas.Identificable;
+import descargas.Musica;
+import descargas.Pelicula;
+import descargas.Utils;
 
 public class DescargaApp {
 
