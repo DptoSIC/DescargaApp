@@ -1,6 +1,6 @@
 package descargas;
 
-public class Fichero implements Identificable {
+public class Fichero implements Identificable<String> {
 	private String id;
 	private String ruta;
 	private Contenido contenido;
@@ -30,7 +30,6 @@ public class Fichero implements Identificable {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "#" + getId() + " - " + getContenido() + " (" + getTamano() + "MB)";
 	}
 }

@@ -1,7 +1,11 @@
 package descargas;
 
-public interface Identificable {
+public interface Identificable<T extends Comparable<T>> extends Comparable<Identificable<T>>{
 
-	String getId();
+	T getId();
 
+	@Override
+	default int compareTo(Identificable<T> identificable) {
+		return getId().compareTo(identificable.getId());
+	}
 }

@@ -17,9 +17,9 @@ import descargas.Utils;
 public class DescargaApp {
 
 	public static void main(String[] args) {
-		Contenido cancion1 = new Musica("1", "tituloA");
-		Contenido cancion2 = new Musica("2", "tituloB");
-		Contenido pelicula1 = new Pelicula("3", "tituloC");
+		Contenido cancion1 = new Musica(1L, "tituloA");
+		Contenido cancion2 = new Musica(2L, "tituloB");
+		Contenido pelicula1 = new Pelicula(3L, "tituloC");
 		Fichero[] listaDescargas = {
 				new Fichero("id1", null, cancion1, 15.2f),
 				new Fichero("id2", null, cancion2, 14.5f),
