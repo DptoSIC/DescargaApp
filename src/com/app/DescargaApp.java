@@ -3,6 +3,7 @@ package com.app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -51,6 +52,29 @@ public class DescargaApp {
 		listaFicheros.forEach(System.out::println);
 		
 		System.out.println(calcularTamanoTotal("", listaDescargas[0], listaDescargas[1], listaDescargas[1]));
+		
+		List<Fichero> descargas = new ArrayList<Fichero>();
+		// Cargo la lista en orden inverso
+		for (int i = listaDescargas.length - 1; i >= 0; i--) {
+			descargas.add(listaDescargas[i]);
+		}
+		System.out.println("\nCarga inicial");
+		descargas.forEach(System.out::println);
+		
+		System.out.println("\nLista ordenada naturalmente");
+		descargas.sort(null);
+		descargas.forEach(System.out::println);
+		
+		Comparator<Fichero> comparaTamano = new Comparator<Fichero>() {
+			@Override
+			public int compare(Fichero arg0, Fichero arg1) {
+				return Float.compare(arg0.getTamano(), arg1.getTamano());
+			}
+		};
+		
+		System.out.println("\nLista ordenada por tamaño");
+		descargas.sort(comparaTamano);
+		descargas.forEach(System.out::println);
 	}
 	
 	private static float calcularTamanoTotal(String loquesea, Fichero... ficheros) {
