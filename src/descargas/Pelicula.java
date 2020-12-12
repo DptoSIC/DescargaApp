@@ -1,6 +1,6 @@
 package descargas;
 
-public class Pelicula extends Contenido {
+public class Pelicula extends ContenidoImpl {
 
 	Director director;
 	Actor[] actoresPrincipales;

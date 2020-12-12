@@ -8,9 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import descargas.Conexion;
-import descargas.Contenido;
+import descargas.ContenidoImpl;
 import descargas.Fichero;
 import descargas.Identificable;
+import descargas.Libro;
 import descargas.Musica;
 import descargas.Nombrable;
 import descargas.Pelicula;
@@ -19,9 +20,9 @@ import descargas.Utils;
 public class DescargaApp {
 
 	public static <T extends Identificable<Long> & Nombrable> void main(String[] args) {
-		Contenido cancion1 = new Musica(1L, "tituloA");
-		Contenido cancion2 = new Musica(2L, "tituloB");
-		Contenido pelicula1 = new Pelicula(3L, "tituloC");
+		ContenidoImpl cancion1 = new Musica(1L, "tituloA");
+		ContenidoImpl cancion2 = new Musica(2L, "tituloB");
+		ContenidoImpl pelicula1 = new Pelicula(3L, "tituloC");
 		
 		// No se puede crear arrays de genericos
 		Fichero[] listaDescargas = {
@@ -35,7 +36,11 @@ public class DescargaApp {
 		// Cargo la lista en orden inverso
 		for (int i = listaDescargas.length - 1; i >= 0; i--) {
 			descargas.add(listaDescargas[i]);
-		}		
+		}
+		
+		// Agrego un tipo heredado de tipo externo
+		Libro miLibro = new Libro("XXXX123", "Titulo Libro");
+		descargas.add(new Fichero("idLibro", null, miLibro, 20f));
 		
 		System.out.println("\nCarga inicial");
 		descargas.forEach(System.out::println);

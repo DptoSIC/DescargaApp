@@ -1,6 +1,6 @@
 package descargas;
 
-public abstract class Contenido implements Identificable<Long>, Nombrable {
+public abstract class ContenidoImpl implements Contenido {
 
 	private Long id;
 	private String titulo;
@@ -15,10 +15,10 @@ public abstract class Contenido implements Identificable<Long>, Nombrable {
 		return titulo;
 	}
 
-	public Contenido() {
+	public ContenidoImpl() {
 	}
 	
-	public Contenido(Long id, String titulo) {
+	public ContenidoImpl(Long id, String titulo) {
 		this.id = id;
 		this.titulo = titulo;
 	}

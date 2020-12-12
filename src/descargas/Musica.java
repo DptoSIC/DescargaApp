@@ -1,6 +1,6 @@
 package descargas;
 
-public class Musica extends Contenido {
+public class Musica extends ContenidoImpl {
 	Artista artista;
 	
 	public Musica(Long id, String titulo) {
