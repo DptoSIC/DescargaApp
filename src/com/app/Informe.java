@@ -4,22 +4,25 @@ import java.util.List;
 
 import descargas.Conexion;
 import descargas.Fichero;
+import descargas.Identificable;
+import descargas.Nombrable;
 import descargas.Utils;
 
-public class Informe {
+public class Informe <T extends Identificable<Long> & Nombrable> {
 
 	private static final String SALTO_LINEA = System.lineSeparator();
 	private static final String ENCABEZADO = "Informe descargas";
 	private static final char CARACTER_SUBRAYADO = '-';
 	private static final String TEXTO_VACIA = "La lista de descargas está vacía.";
-	private List<Fichero> descargas;
+	private List<Fichero<T>> descargas;
 	private Conexion conexion;
 	
 	private static String crearSubrayado(char caracterSubrayador, int longitud) {
+		// Hay mas formas de hacerlo, todo nativo: https://stackoverflow.com/a/25380937
 		return String.format("%0" + longitud + "d", 0).replace('0', caracterSubrayador);
 	}
 	
-	private List<Fichero> getDescargas() {
+	private List<Fichero<T>> getDescargas() {
 		return descargas;
 	}
 	
@@ -27,7 +30,7 @@ public class Informe {
 		return conexion;
 	}
 	
-	public Informe(List<Fichero> descargas, Conexion conexion) {
+	public Informe(List<Fichero<T>> descargas, Conexion conexion) {
 		super();
 		this.descargas = descargas;
 		this.conexion = conexion;

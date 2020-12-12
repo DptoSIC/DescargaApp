@@ -1,9 +1,9 @@
 package descargas;
 
-public class Fichero implements Identificable<String> {
+public class Fichero<T extends Identificable<Long> & Nombrable> implements Identificable<String> {
 	private String id;
 	private String ruta;
-	private Contenido contenido;
+	private T contenido;
 	private float tamano; //Tamano en MB
 	
 	
@@ -16,11 +16,11 @@ public class Fichero implements Identificable<String> {
 		return tamano;
 	}
 	
-	public Contenido getContenido() {
+	public T getContenido() {
 		return contenido;
 	}
 	
-	public Fichero(String id, String ruta, Contenido contenido, float tamano) {
+	public Fichero(String id, String ruta, T contenido, float tamano) {
 		super();
 		this.id = id;
 		this.ruta = ruta;

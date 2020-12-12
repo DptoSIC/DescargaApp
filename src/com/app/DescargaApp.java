@@ -12,52 +12,31 @@ import descargas.Contenido;
 import descargas.Fichero;
 import descargas.Identificable;
 import descargas.Musica;
+import descargas.Nombrable;
 import descargas.Pelicula;
 import descargas.Utils;
 
 public class DescargaApp {
 
-	public static void main(String[] args) {
+	public static <T extends Identificable<Long> & Nombrable> void main(String[] args) {
 		Contenido cancion1 = new Musica(1L, "tituloA");
 		Contenido cancion2 = new Musica(2L, "tituloB");
 		Contenido pelicula1 = new Pelicula(3L, "tituloC");
+		
+		// No se puede crear arrays de genericos
 		Fichero[] listaDescargas = {
 				new Fichero("id1", null, cancion1, 15.2f),
 				new Fichero("id2", null, cancion2, 14.5f),
 				new Fichero("id3", null, pelicula1, 104.5f)
 		};
-		Conexion conexion = //new Conexion(5f, "Movistar");
-							new Conexion() {
-								
-								@Override
-								public float getVelocidadDescarga() {
-									return 5f;
-								}
-								
-							};
-		System.out.println("Tiempo estimado: " + Utils.getTiempo(listaDescargas, conexion));
+		Conexion conexion = () -> 5f; // 5MB/s
 		
-		Identificable[] identificables = { listaDescargas[0], cancion2, pelicula1 };
-		for (Identificable identificable : identificables) {
-			System.out.println(identificable.getId());
-		}
-		
-		
-		Collection<Fichero> listaFicheros = new ArrayList<Fichero>();// Arrays.asList(listaDescargas);
-		for (int i = 0; i < listaDescargas.length; i++) {
-			listaFicheros.add(listaDescargas[i]);
-		}
-//		listaFicheros.get(0).getId();
-		listaFicheros.stream().map(Fichero::getId).forEach(System.out::println);
-		listaFicheros.forEach(System.out::println);
-		
-		System.out.println(calcularTamanoTotal("", listaDescargas[0], listaDescargas[1], listaDescargas[1]));
-		
-		List<Fichero> descargas = new ArrayList<Fichero>();
+		List<Fichero<T>> descargas = new ArrayList<>();
 		// Cargo la lista en orden inverso
 		for (int i = listaDescargas.length - 1; i >= 0; i--) {
 			descargas.add(listaDescargas[i]);
-		}
+		}		
+		
 		System.out.println("\nCarga inicial");
 		descargas.forEach(System.out::println);
 		
@@ -65,9 +44,9 @@ public class DescargaApp {
 		descargas.sort(null);
 		descargas.forEach(System.out::println);
 		
-		Comparator<Fichero> comparaTamano = new Comparator<Fichero>() {
+		Comparator<Fichero<T>> comparaTamano = new Comparator<>() {
 			@Override
-			public int compare(Fichero arg0, Fichero arg1) {
+			public int compare(Fichero<T> arg0, Fichero<T> arg1) {
 				return Float.compare(arg0.getTamano(), arg1.getTamano());
 			}
 		};
@@ -80,23 +59,10 @@ public class DescargaApp {
 		System.out.println(generarInforme(descargas, conexion));
 	}
 	
-	private static float calcularTamanoTotal(String loquesea, Fichero... ficheros) {
-		return Utils.getTamano(ficheros);
-	}
-	
-	private static float calcularTamanoTotal(Collection<Fichero> ficheros) {
-		float total = 0;
-		for (Fichero fichero : ficheros) {
-			total += fichero.getTamano();
-		}
-		
-		return total;
-	}
-	
 	// Puedo usar una Collection para generalizar y si el Informe me pide una List lo hago al vuelo
-	private static Informe generarInforme(Collection<Fichero> descargas, Conexion conexion) {
-		List<Fichero> listaDescargas = new ArrayList<Fichero>(descargas);
-		return new Informe(listaDescargas, conexion);
+	private static <T extends Identificable<Long> & Nombrable> Informe<T> generarInforme(Collection<Fichero<T>> descargas, Conexion conexion) {
+		List<Fichero<T>> listaDescargas = new ArrayList<>(descargas);
+		return new Informe<T>(listaDescargas, conexion);
 	}
 	
 }
