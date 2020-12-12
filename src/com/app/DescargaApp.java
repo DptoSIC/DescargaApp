@@ -75,6 +75,9 @@ public class DescargaApp {
 		System.out.println("\nLista ordenada por tamaño");
 		descargas.sort(comparaTamano);
 		descargas.forEach(System.out::println);
+		
+		System.out.println();
+		System.out.println(generarInforme(descargas, conexion));
 	}
 	
 	private static float calcularTamanoTotal(String loquesea, Fichero... ficheros) {
@@ -88,6 +91,12 @@ public class DescargaApp {
 		}
 		
 		return total;
+	}
+	
+	// Puedo usar una Collection para generalizar y si el Informe me pide una List lo hago al vuelo
+	private static Informe generarInforme(Collection<Fichero> descargas, Conexion conexion) {
+		List<Fichero> listaDescargas = new ArrayList<Fichero>(descargas);
+		return new Informe(listaDescargas, conexion);
 	}
 	
 }
