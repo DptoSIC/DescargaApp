@@ -1,14 +1,14 @@
 package descargas;
 
-public class Fichero<T extends Identificable<Long> & Nombrable> implements Identificable<String> {
-	private String id;
+public class Fichero<T extends Identificable<String> & Nombrable> implements Identificable<Long> {
+	private Long id;
 	private String ruta;
 	private T contenido;
 	private float tamano; //Tamano en MB
 	
 	
 	@Override
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -20,7 +20,7 @@ public class Fichero<T extends Identificable<Long> & Nombrable> implements Ident
 		return contenido;
 	}
 	
-	public Fichero(String id, String ruta, T contenido, float tamano) {
+	public Fichero(Long id, String ruta, T contenido, float tamano) {
 		super();
 		this.id = id;
 		this.ruta = ruta;

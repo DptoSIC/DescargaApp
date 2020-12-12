@@ -19,16 +19,16 @@ import descargas.Utils;
 
 public class DescargaApp {
 
-	public static <T extends Identificable<Long> & Nombrable> void main(String[] args) {
-		ContenidoImpl cancion1 = new Musica(1L, "tituloA");
-		ContenidoImpl cancion2 = new Musica(2L, "tituloB");
-		ContenidoImpl pelicula1 = new Pelicula(3L, "tituloC");
+	public static <T extends Identificable<String> & Nombrable> void main(String[] args) {
+		ContenidoImpl cancion1 = new Musica("1", "tituloA");
+		ContenidoImpl cancion2 = new Musica("2", "tituloB");
+		ContenidoImpl pelicula1 = new Pelicula("3", "tituloC");
 		
 		// No se puede crear arrays de genericos
 		Fichero[] listaDescargas = {
-				new Fichero("id1", null, cancion1, 15.2f),
-				new Fichero("id2", null, cancion2, 14.5f),
-				new Fichero("id3", null, pelicula1, 104.5f)
+				new Fichero(1L, null, cancion1, 15.2f),
+				new Fichero(2L, null, cancion2, 14.5f),
+				new Fichero(3L, null, pelicula1, 104.5f)
 		};
 		Conexion conexion = () -> 5f; // 5MB/s
 		
@@ -40,7 +40,7 @@ public class DescargaApp {
 		
 		// Agrego un tipo heredado de tipo externo
 		Libro miLibro = new Libro("XXXX123", "Titulo Libro");
-		descargas.add(new Fichero("idLibro", null, miLibro, 20f));
+		descargas.add(new Fichero(4L, null, miLibro, 20f));
 		
 		System.out.println("\nCarga inicial");
 		descargas.forEach(System.out::println);
@@ -65,7 +65,7 @@ public class DescargaApp {
 	}
 	
 	// Puedo usar una Collection para generalizar y si el Informe me pide una List lo hago al vuelo
-	private static <T extends Identificable<Long> & Nombrable> Informe<T> generarInforme(Collection<Fichero<T>> descargas, Conexion conexion) {
+	private static <T extends Identificable<String> & Nombrable> Informe<T> generarInforme(Collection<Fichero<T>> descargas, Conexion conexion) {
 		List<Fichero<T>> listaDescargas = new ArrayList<>(descargas);
 		return new Informe<T>(listaDescargas, conexion);
 	}

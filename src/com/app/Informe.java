@@ -8,7 +8,7 @@ import descargas.Identificable;
 import descargas.Nombrable;
 import descargas.Utils;
 
-public class Informe <T extends Identificable<Long> & Nombrable> {
+public class Informe <T extends Identificable<String> & Nombrable> {
 
 	private static final String SALTO_LINEA = System.lineSeparator();
 	private static final String ENCABEZADO = "Informe descargas";

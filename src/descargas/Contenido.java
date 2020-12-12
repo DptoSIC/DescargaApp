@@ -1,8 +1,8 @@
 package descargas;
 
-public interface Contenido extends Identificable<Long>, Nombrable {
+public interface Contenido extends Identificable<String>, Nombrable {
 
-	Long getId();
+	String getId();
 	String getTitulo();
 
 }
