@@ -23,4 +23,8 @@ public abstract class Contenido implements Identificable, Nombrable {
 		this.titulo = titulo;
 	}
 	
+	@Override
+	public String toString() {
+		return getTitulo();
+	}
 }
