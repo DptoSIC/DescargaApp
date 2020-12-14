@@ -40,7 +40,9 @@ public class DescargaApp {
 		
 		// Agrego un tipo heredado de tipo externo
 		Libro miLibro = new Libro("XXXX123", "Titulo Libro");
-		descargas.add(new Fichero(4L, null, miLibro, 20f));
+		Fichero<T> ficheroLibro = new Fichero(4L, null, miLibro, 20f);
+		descargas.add(ficheroLibro);
+		ficheroLibro.setPremium(false);
 		
 		System.out.println("\nCarga inicial");
 		descargas.forEach(System.out::println);
@@ -49,7 +51,7 @@ public class DescargaApp {
 		descargas.sort(null);
 		descargas.forEach(System.out::println);
 		
-		Comparator<Fichero<T>> comparaTamano = new Comparator<>() {
+		Comparator<Fichero<T>> comparaTamano = new Comparator<Fichero<T>>() {
 			@Override
 			public int compare(Fichero<T> arg0, Fichero<T> arg1) {
 				return Float.compare(arg0.getTamano(), arg1.getTamano());
@@ -61,13 +63,23 @@ public class DescargaApp {
 		descargas.forEach(System.out::println);
 		
 		System.out.println();
-		System.out.println(generarInforme(descargas, conexion));
+		System.out.println(generarInforme(descargar(descargas, false), conexion));
 	}
 	
 	// Puedo usar una Collection para generalizar y si el Informe me pide una List lo hago al vuelo
 	private static <T extends Identificable<String> & Nombrable> Informe<T> generarInforme(Collection<Fichero<T>> descargas, Conexion conexion) {
 		List<Fichero<T>> listaDescargas = new ArrayList<>(descargas);
 		return new Informe<T>(listaDescargas, conexion);
+	}
+	
+	private static <T extends Identificable<String> & Nombrable> Collection<Fichero<T>> descargar(Collection<Fichero<T>> descargas, boolean premium) {
+		Collection<Fichero<T>> descargaEfectiva = new ArrayList<Fichero<T>>();
+		for (Fichero<T> fichero : descargas) {
+			if (premium || !fichero.isPremium()) {
+				descargaEfectiva.add(fichero);
+			}
+		}
+		return descargaEfectiva;
 	}
 	
 }

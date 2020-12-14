@@ -5,7 +5,7 @@ public class Fichero<T extends Identificable<String> & Nombrable> implements Ide
 	private String ruta;
 	private T contenido;
 	private float tamano; //Tamano en MB
-	
+	private boolean premium = true;
 	
 	@Override
 	public Long getId() {
@@ -20,6 +20,14 @@ public class Fichero<T extends Identificable<String> & Nombrable> implements Ide
 		return contenido;
 	}
 	
+	public boolean isPremium() {
+		return premium;
+	}
+	
+	public void setPremium(boolean premium) {
+		this.premium = premium;
+	}
+	
 	public Fichero(Long id, String ruta, T contenido, float tamano) {
 		super();
 		this.id = id;
@@ -30,6 +38,7 @@ public class Fichero<T extends Identificable<String> & Nombrable> implements Ide
 	
 	@Override
 	public String toString() {
-		return "#" + getId() + " - " + getContenido() + " (" + getTamano() + "MB)";
+		return ((isPremium()) ? "*" : "")
+			+ "#" + getId() + " - " + getContenido() + " (" + getTamano() + "MB)";
 	}
 }
