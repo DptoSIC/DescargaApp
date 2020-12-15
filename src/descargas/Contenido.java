@@ -1,6 +1,6 @@
 package descargas;
 
-public interface Contenido<T extends Comparable<T>> extends Identificable<T>, Nombrable {
+public interface Contenido<T extends Comparable<T>> extends Identificable<T>, Nombrable, Datable {
 
 	T getId();
 	String getTitulo();

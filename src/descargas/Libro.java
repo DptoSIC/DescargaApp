@@ -1,5 +1,8 @@
 package descargas;
 
+import java.time.Instant;
+import java.time.ZoneId;
+
 import com.github.Book;
 
 public class Libro extends Book implements Contenido {
@@ -18,4 +21,8 @@ public class Libro extends Book implements Contenido {
 		return getTitle();
 	}
 
+	@Override
+	public Instant getFecha() {
+		return getDate().atStartOfDay(ZoneId.systemDefault()).toInstant();
+	}
 }

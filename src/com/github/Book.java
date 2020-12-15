@@ -1,8 +1,11 @@
 package com.github;
 
+import java.time.LocalDate;
+
 public class Book {
 	String isbn;
 	String title;
+	LocalDate date = LocalDate.now();
 	
 	public String getIsbn() {
 		return isbn;
@@ -10,6 +13,10 @@ public class Book {
 	
 	public String getTitle() {
 		return title;
+	}
+	
+	public LocalDate getDate() {
+		return date;
 	}
 
 	public Book(String isbn, String title) {

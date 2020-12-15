@@ -1,25 +1,23 @@
 package com.app;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import descargas.Conexion;
 import descargas.ContenidoImpl;
+import descargas.Datable;
 import descargas.Fichero;
 import descargas.Identificable;
 import descargas.Libro;
 import descargas.Musica;
 import descargas.Nombrable;
 import descargas.Pelicula;
-import descargas.Utils;
 
 public class DescargaApp {
 
-	public static <T extends Identificable<String> & Nombrable> void main(String[] args) {
+	public static <T extends Identificable<String> & Nombrable & Datable> void main(String[] args) {
 		ContenidoImpl cancion1 = new Musica("1", "tituloA");
 		ContenidoImpl cancion2 = new Musica("2", "tituloB");
 		ContenidoImpl pelicula1 = new Pelicula("3", "tituloC");
@@ -64,6 +62,11 @@ public class DescargaApp {
 		
 		System.out.println();
 		System.out.println(generarInforme(descargar(descargas, false), conexion));
+		
+		System.out.println("\nLista ordenada por fecha");
+		descargas.sort((f1, f2) -> f1.getContenido().getFecha().compareTo(f2.getContenido().getFecha()));
+		System.out.println(generarInforme(descargas, conexion));
+		
 	}
 	
 	// Puedo usar una Collection para generalizar y si el Informe me pide una List lo hago al vuelo
