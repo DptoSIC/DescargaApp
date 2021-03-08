@@ -1,13 +1,6 @@
 package ejemplo.estatico;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-
-import ejemplo.externo.Exchange;
-
 public class CambioImpl extends Object implements Cambio {
-  private static final DecimalFormat FORMATO = new DecimalFormat("0.0#", DecimalFormatSymbols.getInstance());
 
 //  static Cambio cambio = new Cambio("F", "D", 3);
   private String monedaOrigen, monedaDestino;
@@ -49,7 +42,7 @@ public class CambioImpl extends Object implements Cambio {
 
   @Override
   public String toString() {
-    return "Cambio [" + getCantidadOrigen() + getMonedaOrigen() + " a " + FORMATO.format(getCantidadDestino()) + getMonedaDestino() + "]";
+    return cambioToString();
   }
   
   @Override
@@ -60,4 +53,5 @@ public class CambioImpl extends Object implements Cambio {
   private void realizarConversionPor(float conversion) {
     setCantidadDestino(getCantidadOrigen() * conversion);
   }
+  
 }

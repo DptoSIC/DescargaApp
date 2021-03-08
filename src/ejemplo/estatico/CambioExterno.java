@@ -2,9 +2,8 @@ package ejemplo.estatico;
 
 import ejemplo.externo.Exchange;
 
-public class CambioExterno extends Exchange implements Cambio, Comparable<CambioExterno> {
+public class CambioExterno extends Exchange implements Cambio {
 
-  private static final String[] MONEDAS = new String[] { "$", "€", "L" };
   private String monedaOrigen, monedaDestino;
   
   private static String[] getMonedas() {
@@ -23,14 +22,12 @@ public class CambioExterno extends Exchange implements Cambio, Comparable<Cambio
 
   @Override
   public float getCantidadOrigen() {
-    // TODO Auto-generated method stub
-    return 0;
+    return getCentsFrom()/100f;
   }
 
   @Override
   public float getCantidadDestino() {
-    // TODO Auto-generated method stub
-    return 0;
+    return getCentsTo()/100f;
   }
 
   @Override
@@ -45,7 +42,7 @@ public class CambioExterno extends Exchange implements Cambio, Comparable<Cambio
   
   @Override
   public String toString() {
-    return "CambioExterno [" + getCantidadOrigen() + getMonedaOrigen() + " a " + FORMATO.format(getCantidadDestino()) + getMonedaDestino() + "]";
+    return cambioToString();
   }
   
 }

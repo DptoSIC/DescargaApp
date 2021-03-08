@@ -2,6 +2,11 @@ package ejemplo.estatico;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -30,7 +35,7 @@ public class PuestoCambio {
     System.out.println(cambio);
     System.out.println(cambio2);
     
-    Cambio cambio3 = new CambioExterno(Exchange.DOLLAR, Exchange.EURO, 1000);
+    Cambio cambio3 = new CambioExterno(Exchange.DOLLAR, Exchange.EURO, 1010);
     Cambio cambio4 = new CambioExterno(Exchange.LIBRA, Exchange.EURO, 2000);
     
     PuestoCambio puesto = new PuestoCambio();
@@ -52,6 +57,12 @@ public class PuestoCambio {
     System.out.println(cambio);
     
     System.out.println(puesto.getFactorConversion(cambio3));
+    
+    List<Cambio> cambios = Arrays.asList(cambio, cambio2, cambio4, cambio3);
+    cambios.forEach(System.out::println);
+    cambios.sort(Comparator.naturalOrder());
+    System.out.println("Lista ordenada");
+    cambios.forEach(System.out::println);
   }
 
   public float getFactorConversion(Cambio cambio) {
